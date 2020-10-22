@@ -14,11 +14,13 @@ public class playerController : MonoBehaviour
     //Private Variables
 
     private Rigidbody2D rBody;
+    private Animator anim;
     private bool isGrounded = false;
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     //pHYSICS
@@ -36,6 +38,11 @@ public class playerController : MonoBehaviour
 
 
         rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
+
+        //cominucate with animator
+        anim.SetFloat("xVelocity", Mathf.Abs(rBody.velocity.x));
+        anim.SetFloat("yVelocity", rBody.velocity.y);
+        anim.SetBool("isGrounded", isGrounded);
 
     }
 
