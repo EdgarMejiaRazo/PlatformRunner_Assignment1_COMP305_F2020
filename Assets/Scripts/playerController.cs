@@ -16,6 +16,8 @@ public class playerController : MonoBehaviour
     private Rigidbody2D rBody;
     private Animator anim;
     private bool isGrounded = false;
+    private bool isFacingRight = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,17 @@ public class playerController : MonoBehaviour
 
         rBody.velocity = new Vector2(horiz * speed, rBody.velocity.y);
 
+        // Check if flip the player
+
+        if((isFacingRight && rBody.velocity.x < 0) || (!isFacingRight && rBody.velocity.x > 0))
+        {
+            Flip();
+        }
+        //else if (!isFacingRight && rBody.velocity.x > 0)
+        //{
+        //    Flip();
+        //}
+
         //cominucate with animator
         anim.SetFloat("xVelocity", Mathf.Abs(rBody.velocity.x));
         anim.SetFloat("yVelocity", rBody.velocity.y);
@@ -50,6 +63,15 @@ public class playerController : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheckPos.position, groundCheckRadius, whatIsGround);
         
+    }
+
+    private void Flip()
+    {
+        Vector3 temp = transform.localScale;
+        temp.x *= -1;
+        transform.localScale = temp;
+
+        isFacingRight = !isFacingRight;
     }
         
    
