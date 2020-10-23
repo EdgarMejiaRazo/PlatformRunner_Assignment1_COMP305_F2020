@@ -17,12 +17,14 @@ public class playerController : MonoBehaviour
     private Animator anim;
     private bool isGrounded = false;
     private bool isFacingRight = true;
+    AudioSource jumpSound;
 
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        //jumpSound = GetComponent<AudioSource>();
     }
 
     //pHYSICS
@@ -34,6 +36,7 @@ public class playerController : MonoBehaviour
         //Jump
         if(isGrounded && Input.GetAxis("Jump") > 0)
         {
+            jumpSound.Play();
             rBody.AddForce(new Vector2(0.0f, jumpForce));
             isGrounded = false;
         }
