@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour
     {
         rBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        //jumpSound = GetComponent<AudioSource>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
     //pHYSICS
